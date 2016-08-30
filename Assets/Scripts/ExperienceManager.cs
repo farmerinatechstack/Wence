@@ -9,6 +9,7 @@ using System.Collections.Generic;
 public class ExperienceManager : MonoBehaviour {
 	public static int Power;
 	public static int MAX_POWER = 1000;
+	public static float PowerRatio;
 
 
 	// Events: the following are string names for all possible events in the experience
@@ -30,15 +31,14 @@ public class ExperienceManager : MonoBehaviour {
 
 	private void Start() {
 		Power = GetPower ();
+		PowerRatio = (float)Power / (float)MAX_POWER;
 		TriggerEvent (INFO_LOADED);
 	}
 
 	/* Function: Update
 	 * Used to mock events for testing */
 	private void Update() {
-		if (Input.GetKeyDown(KeyCode.Space)) {
-			TriggerEvent (INFO_LOADED);
-		}
+		
 	}
 
 	private void Init() {
@@ -51,7 +51,7 @@ public class ExperienceManager : MonoBehaviour {
 	 * Returns the power of the environment */
 	private int GetPower() {
 		// TODO: read from website to get environment power
-		return 500;
+		return 750;
 	}
 
 	public static void StartListening(string eventName, UnityAction listener) {

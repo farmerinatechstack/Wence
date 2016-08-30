@@ -4,8 +4,12 @@ using System.Collections;
 /* Class: PowerItem
  * Handles the properties of a PowerItem spawned to the Sea Floor */
 public class PowerItem : MonoBehaviour {
-	[SerializeField] private bool randomizeRotation;
-	[SerializeField] private bool randomizeScale;
+	public bool randomizeRotation;
+	[SerializeField] private float maxRotX;
+	[SerializeField] private float maxRotY;
+	[SerializeField] private float maxRotZ;
+
+	public bool randomizeScale;
 	[SerializeField] private float scaleMin;
 	[SerializeField] private float scaleMax;
 
@@ -25,12 +29,10 @@ public class PowerItem : MonoBehaviour {
 	public Quaternion getRotation() {
 		if (!randomizeRotation) return transform.rotation;
 
-		float maxRotation = 90f;
-
 		return Quaternion.Euler (new Vector3 (
-			Random.Range (0f, maxRotation), 
-			Random.Range (0f, maxRotation), 
-			Random.Range (0f, maxRotation)));
+			Random.Range (0f, maxRotX), 
+			Random.Range (0f, maxRotY), 
+			Random.Range (0f, maxRotZ)));
 	}
 
 	public float getYOffset() {

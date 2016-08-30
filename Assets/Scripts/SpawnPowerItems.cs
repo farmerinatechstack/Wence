@@ -14,9 +14,14 @@ public class SpawnPowerItems : MonoBehaviour {
 	private int powerThreshold = 700;
 	private List<GameObject> powerItems;
 
+	private Vector3 playerPosition;
+
 	private void Awake() {
 		powerItems = new List<GameObject> (lowPowerItems);
 		if (ExperienceManager.Power >= powerThreshold) powerItems.AddRange (highPowerItems);
+
+		playerPosition = GameObject.FindGameObjectWithTag ("MainCamera").transform.position;
+		playerPosition.y = 0.5f;
 	}
 
 	private void OnEnable() {
@@ -37,7 +42,11 @@ public class SpawnPowerItems : MonoBehaviour {
 
 			Vector3 spawnPosition = GetSpawnPosition (objProperties);
 			if (spawnPosition != Vector3.zero) {
-				GameObject spawnedObj = Instantiate (powerItem, spawnPosition, objProperties.getRotation()) as GameObject;
+				Quaternion rot = objProperties.getRotation ();
+
+				GameObject spawnedObj = Instantiate (powerItem, spawnPosition, rot) as GameObject;
+				if (!objProperties.randomizeRotation)
+					spawnedObj.transform.LookAt (playerPosition);
 				spawnedObj.transform.parent = transform;
 			}
 		}
