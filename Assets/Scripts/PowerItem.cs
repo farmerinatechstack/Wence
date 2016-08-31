@@ -21,6 +21,12 @@ public class PowerItem : MonoBehaviour {
 	//[SerializeField] private bool canBeSelected;
 	//[SerializeField] private VRAssets.VRInteractiveItem interactiveItem;
 
+	private void Start() {
+		if (randomizeScale) {
+			transform.localScale = transform.localScale * Random.Range (scaleMin, scaleMax);
+		}
+	}
+
 	private void Awake() {
 		/*
 		canBeSelected = true;

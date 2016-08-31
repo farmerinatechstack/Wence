@@ -8,7 +8,7 @@ using System.Collections;
 public class FadeTransition : MonoBehaviour {
 	public Material m;
 	public float fadeTime = 2.5f;	// Time to fade
-	public string sceneName;		// Name of scene to transition to
+	public float freeTime = 60f;
 
 	private void OnEnable() {
 		ExperienceManager.StartListening (ExperienceManager.ENVIRONMENT_SET, FadeFrom);
@@ -21,6 +21,7 @@ public class FadeTransition : MonoBehaviour {
 	// The material should always start as opaque.
 	void Start () {
 		m.color = new Color (m.color.r, m.color.g, m.color.b, 1.0f);
+		StartCoroutine (DelayReturnToStart ());
 	}
 
 	void OnDestroy() {
@@ -36,7 +37,7 @@ public class FadeTransition : MonoBehaviour {
 	}
 
 	/* Function: FadeTo
-	 * Fade to transparent from color */
+	 * Fade to black from transparent */
 	void FadeTo() {
 		StartCoroutine (FadeTo(1.0f, fadeTime));
 	}
@@ -53,5 +54,12 @@ public class FadeTransition : MonoBehaviour {
 
 		Color finalColor = new Color(m.color.r, m.color.g, m.color.b, targetAlpha);
 		m.color = finalColor;		// Set the alpha to the target alpha
+	}
+
+	IEnumerator DelayReturnToStart() {
+		yield return new WaitForSeconds (freeTime);
+		FadeTo ();
+		yield return new WaitForSeconds (fadeTime);
+		SceneManager.LoadScene ("WenceTitle");
 	}
 }

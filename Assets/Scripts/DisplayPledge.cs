@@ -23,8 +23,8 @@ public class DisplayPledge : MonoBehaviour {
 	private void DisplayPledgeInformation() {
 		ExperienceManager.StopListening (ExperienceManager.ENVIRONMENT_SET, DisplayPledgeInformation);
 
-		int count = ExperienceManager.Power;
-		pledgeCount.text = count.ToString ();
+		int health = (int) (ExperienceManager.PowerRatio * 100);
+		pledgeCount.text = health.ToString () + " %";
 
 		StartCoroutine (Cycle());
 	}

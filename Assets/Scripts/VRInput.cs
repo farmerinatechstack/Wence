@@ -20,6 +20,7 @@ namespace VRAssets {
 
 		private void CheckInput() {
 			if (Input.GetButtonDown ("Fire1")) { 	// Touchpad down
+				print("fire 1 pressed");
 				if (OnDown != null)
 					OnDown ();
 			}
