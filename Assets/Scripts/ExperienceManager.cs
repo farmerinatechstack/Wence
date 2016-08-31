@@ -31,10 +31,12 @@ public class ExperienceManager : MonoBehaviour {
 	private static ExperienceManager eventManager;
 	private Dictionary<string, UnityEvent> eventDictionary;
 
-	private void Start() {
-		Power = GetPower ();
-		PowerRatio = (float)Power / (float)MAX_POWER;
-		TriggerEvent (INFO_LOADED);
+	private void OnEnable() {
+		StartListening (ExperienceManager.INFO_LOADED, SetPower);
+	}
+
+	private void OnDisable() {
+		StopListening (ExperienceManager.INFO_LOADED, SetPower);
 	}
 
 	/* Function: Update
@@ -49,11 +51,15 @@ public class ExperienceManager : MonoBehaviour {
 		}
 	}
 
-	/* Function: GetPower
-	 * Returns the power of the environment */
-	private int GetPower() {
-		Power = SMSManager.Instance.pledgeCount;
-		return Power + 200;
+	/* Function: SetPower
+	 * Sets the power and power percentage of the environment */
+	private void SetPower() {
+		Power = SMSManager.pledgeCount + 200;
+		PowerRatio = (float)Power / (float)MAX_POWER;
+	}
+
+	public static int GetPower() {
+		return Power;
 	}
 
 	public static void StartListening(string eventName, UnityAction listener) {
@@ -75,8 +81,6 @@ public class ExperienceManager : MonoBehaviour {
 	}
 
 	public static void TriggerEvent(string eventName) {
-		print ("Triggering: " + eventName);
-
 		UnityEvent thisEvent = null;
 		if (instance.eventDictionary.TryGetValue (eventName, out thisEvent)) {
 			thisEvent.Invoke ();

@@ -16,12 +16,13 @@ public class PowerItem : MonoBehaviour {
 	[SerializeField] private float yOffset;
 	[SerializeField] private float objRadius;
 
-	[SerializeField] private VRAssets.ReticleRadial radial;
-	[SerializeField] private bool inGaze;
-	[SerializeField] private bool canBeSelected;
-	[SerializeField] private VRAssets.VRInteractiveItem interactiveItem;
+	//[SerializeField] private VRAssets.ReticleRadial radial;
+	//[SerializeField] private bool inGaze;
+	//[SerializeField] private bool canBeSelected;
+	//[SerializeField] private VRAssets.VRInteractiveItem interactiveItem;
 
 	private void Awake() {
+		/*
 		canBeSelected = true;
 		radial = GameObject.FindGameObjectWithTag ("MainCamera").GetComponent<VRAssets.ReticleRadial> ();
 
@@ -29,8 +30,10 @@ public class PowerItem : MonoBehaviour {
 			float scale = Random.Range (scaleMin, scaleMax);
 			transform.localScale = new Vector3 (scale, scale, scale);
 		}
+		*/
 	}
 
+	/*
 	private void OnEnable() {
 		interactiveItem.OnEnter += HandleEnter;
 		interactiveItem.OnExit += HandleExit;
@@ -75,6 +78,7 @@ public class PowerItem : MonoBehaviour {
 	private void ToggleCanBeSelected() {
 		canBeSelected = !canBeSelected;
 	}
+	*/
 
 	public Quaternion getRotation() {
 		if (!randomizeRotation) return transform.rotation;

@@ -13,6 +13,10 @@ namespace VRAssets {
 			get { return entered; }
 		}
 
+		private void Start() {
+
+		}
+
 		public void Enter() {
 			entered = true;
 

@@ -30,6 +30,10 @@ namespace VRAssets
 			originalRotation = reticleTransform.localRotation;
 		}
 
+		private void Start() {
+
+		}
+
 		public void Hide()
 		{
 			reticleImage.enabled = false;

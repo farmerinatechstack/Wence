@@ -1,0 +1,263 @@
+# 3ds Max Wavefront OBJ Exporter v0.94b - (c)2007 guruware
+# File Created: 19.05.2012 16:28:23
+
+newmtl 02___Default
+	Ns 50.0000
+	Ni 1.6000
+	d 1.0000
+	Tr 1.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.0000 0.0000 0.0000
+	Kd 0.5000 0.5000 0.5000
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_refl Raytrace_Raytrace.tga
+
+newmtl Metal02_1
+	Ns 50.0000
+	Ni 1.6000
+	d 1.0000
+	Tr 1.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.0000 0.0000 0.0000
+	Kd 0.5000 0.5000 0.5000
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_refl Raytrace_Raytrace.tga
+
+newmtl WoodenPlank3
+	Ns 50.0000
+	Ni 1.6000
+	d 1.0000
+	Tr 1.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.0000 0.0000 0.0000
+	Kd 0.5000 0.5000 0.5000
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka E:\Black Mirror 2\s079_Sewerentrance\3D\s079_Sewerentrance\maps\s079_WoodPlank3Col.jpg
+	map_Kd E:\Black Mirror 2\s079_Sewerentrance\3D\s079_Sewerentrance\maps\s079_WoodPlank3Col.jpg
+	map_bump E:\Black Mirror 2\s079_Sewerentrance\3D\s079_Sewerentrance\maps\s079_WoodPlank3Col.jpg
+	bump E:\Black Mirror 2\s079_Sewerentrance\3D\s079_Sewerentrance\maps\s079_WoodPlank3Col.jpg
+	map_refl Mask_Mask.tga
+
+newmtl Metal01_8
+	Ns 50.0000
+	Ni 1.6000
+	d 1.0000
+	Tr 1.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.0000 0.0000 0.0000
+	Kd 0.5000 0.5000 0.5000
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_refl Mask_Mask.tga
+
+newmtl Metal10_6
+	Ns 50.0000
+	Ni 1.6000
+	d 1.0000
+	Tr 1.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.0000 0.0000 0.0000
+	Kd 0.5000 0.5000 0.5000
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_refl Mask_Mask.tga
+
+newmtl Wood1x
+	Ns 50.0000
+	Ni 1.6000
+	d 1.0000
+	Tr 1.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.0000 0.0000 0.0000
+	Kd 0.5000 0.5000 0.5000
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_refl Raytrace_Raytrace.tga
+
+newmtl Wood1_2
+	Ns 50.0000
+	Ni 1.6000
+	d 1.0000
+	Tr 1.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.0000 0.0000 0.0000
+	Kd 0.5000 0.5000 0.5000
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_refl Raytrace_Raytrace.tga
+
+newmtl Wood1_122
+	Ns 50.0000
+	Ni 1.6000
+	d 1.0000
+	Tr 1.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.0000 0.0000 0.0000
+	Kd 0.5000 0.5000 0.5000
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_refl Raytrace_Raytrace.tga
+
+newmtl Wood2
+	Ns 50.0000
+	Ni 1.6000
+	d 1.0000
+	Tr 1.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.0000 0.0000 0.0000
+	Kd 0.5000 0.5000 0.5000
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka E:\Black Mirror 2\s079_Sewerentrance\3D\s079_Sewerentrance\maps\s079_WoodPlank2Col.jpg
+	map_Kd E:\Black Mirror 2\s079_Sewerentrance\3D\s079_Sewerentrance\maps\s079_WoodPlank2Col.jpg
+	map_bump E:\Black Mirror 2\s079_Sewerentrance\3D\s079_Sewerentrance\maps\s079_WoodPlank2Col.jpg
+	bump E:\Black Mirror 2\s079_Sewerentrance\3D\s079_Sewerentrance\maps\s079_WoodPlank2Col.jpg
+	map_refl Raytrace_Raytrace.tga
+
+newmtl Wood2_1
+	Ns 50.0000
+	Ni 1.6000
+	d 1.0000
+	Tr 1.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.0000 0.0000 0.0000
+	Kd 0.5000 0.5000 0.5000
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka E:\Black Mirror 2\s088_BunkerMain\3D\maps\s088_Wood2_Col.jpg
+	map_Kd E:\Black Mirror 2\s088_BunkerMain\3D\maps\s088_Wood2_Col.jpg
+	map_bump E:\Black Mirror 2\s088_BunkerMain\3D\maps\s088_Wood2_Col.jpg
+	bump E:\Black Mirror 2\s088_BunkerMain\3D\maps\s088_Wood2_Col.jpg
+	map_refl Mask_Mask.tga
+
+newmtl wooden_beams_ends
+	Ns 50.0000
+	Ni 1.6000
+	d 1.0000
+	Tr 1.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.0000 0.0000 0.0000
+	Kd 0.5000 0.5000 0.5000
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka E:\3DsModely_Turbo\061_woodenBeams\tex\WoodEnds0019_5_L.jpg
+	map_Kd E:\3DsModely_Turbo\061_woodenBeams\tex\WoodEnds0019_5_L.jpg
+	map_bump E:\3DsModely_Turbo\061_woodenBeams\tex\WoodEnds0019_5_L.jpg
+	bump E:\3DsModely_Turbo\061_woodenBeams\tex\WoodEnds0019_5_L.jpg
+	map_refl Raytrace_Raytrace.tga
+
+newmtl Wood2_2
+	Ns 50.0000
+	Ni 1.6000
+	d 1.0000
+	Tr 1.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.0000 0.0000 0.0000
+	Kd 0.5000 0.5000 0.5000
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka E:\Black Mirror 2\s088_BunkerMain\3D\maps\s088_Wood2_Col.jpg
+	map_Kd E:\Black Mirror 2\s088_BunkerMain\3D\maps\s088_Wood2_Col.jpg
+	map_bump E:\Black Mirror 2\s088_BunkerMain\3D\maps\s088_Wood2_Col.jpg
+	bump E:\Black Mirror 2\s088_BunkerMain\3D\maps\s088_Wood2_Col.jpg
+	map_refl Mask_Mask.tga
+
+newmtl wooden_beams_ends2
+	Ns 50.0000
+	Ni 1.6000
+	d 1.0000
+	Tr 1.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.0000 0.0000 0.0000
+	Kd 0.5000 0.5000 0.5000
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka E:\3DsModely_Turbo\061_woodenBeams\tex\WoodEnds0019_5_L.jpg
+	map_Kd E:\3DsModely_Turbo\061_woodenBeams\tex\WoodEnds0019_5_L.jpg
+	map_bump E:\3DsModely_Turbo\061_woodenBeams\tex\WoodEnds0019_5_L.jpg
+	bump E:\3DsModely_Turbo\061_woodenBeams\tex\WoodEnds0019_5_L.jpg
+	map_refl Raytrace_Raytrace.tga
+
+newmtl wooden_beams_2_rotated
+	Ns 50.0000
+	Ni 1.6000
+	d 1.0000
+	Tr 1.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.0000 0.0000 0.0000
+	Kd 0.5000 0.5000 0.5000
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka E:\3DsModely_Turbo\061_woodenBeams\tex\WoodRough0088_1_M_2.jpg
+	map_Kd E:\3DsModely_Turbo\061_woodenBeams\tex\WoodRough0088_1_M_2.jpg
+	map_bump E:\3DsModely_Turbo\061_woodenBeams\tex\WoodRough0088_1_M_2.jpg
+	bump E:\3DsModely_Turbo\061_woodenBeams\tex\WoodRough0088_1_M_2.jpg
+	map_refl Raytrace_Raytrace.tga
+
+newmtl wooden_beams_5_rotated
+	Ns 50.0000
+	Ni 1.6000
+	d 1.0000
+	Tr 1.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.0000 0.0000 0.0000
+	Kd 0.5000 0.5000 0.5000
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka E:\3DsModely_Turbo\061_woodenBeams\tex\WoodRough0088_1_M_2.jpg
+	map_Kd E:\3DsModely_Turbo\061_woodenBeams\tex\WoodRough0088_1_M_2.jpg
+	map_bump E:\3DsModely_Turbo\061_woodenBeams\tex\WoodRough0088_1_M_2.jpg
+	bump E:\3DsModely_Turbo\061_woodenBeams\tex\WoodRough0088_1_M_2.jpg
+	map_refl Raytrace_Raytrace.tga
+
+newmtl wooden_beams_3_rotated
+	Ns 50.0000
+	Ni 1.6000
+	d 1.0000
+	Tr 1.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.0000 0.0000 0.0000
+	Kd 0.5000 0.5000 0.5000
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka E:\3DsModely_Turbo\061_woodenBeams\tex\WoodRough0088_1_M_2.jpg
+	map_Kd E:\3DsModely_Turbo\061_woodenBeams\tex\WoodRough0088_1_M_2.jpg
+	map_bump E:\3DsModely_Turbo\061_woodenBeams\tex\WoodRough0088_1_M_2.jpg
+	bump E:\3DsModely_Turbo\061_woodenBeams\tex\WoodRough0088_1_M_2.jpg
+	map_refl Raytrace_Raytrace.tga
+
+newmtl Wood
+	Ns 50.0000
+	Ni 1.6000
+	d 1.0000
+	Tr 1.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.0000 0.0000 0.0000
+	Kd 0.5000 0.5000 0.5000
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka E:\Black Mirror 2\s079_Sewerentrance\3D\s079_Sewerentrance\maps\s079_WoodPlankCol.jpg
+	map_Kd E:\Black Mirror 2\s079_Sewerentrance\3D\s079_Sewerentrance\maps\s079_WoodPlankCol.jpg
+	map_bump E:\Black Mirror 2\s079_Sewerentrance\3D\s079_Sewerentrance\maps\s079_WoodPlankSpec.jpg
+	bump E:\Black Mirror 2\s079_Sewerentrance\3D\s079_Sewerentrance\maps\s079_WoodPlankSpec.jpg
+	map_refl Raytrace_Raytrace.tga
