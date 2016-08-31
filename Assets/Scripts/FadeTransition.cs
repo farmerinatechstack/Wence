@@ -11,11 +11,11 @@ public class FadeTransition : MonoBehaviour {
 	public string sceneName;		// Name of scene to transition to
 
 	private void OnEnable() {
-		ExperienceManager.StartListening (ExperienceManager.INFO_LOADED, FadeFrom);
+		ExperienceManager.StartListening (ExperienceManager.ENVIRONMENT_SET, FadeFrom);
 	}
 
 	private void OnDisable() {
-		ExperienceManager.StartListening (ExperienceManager.INFO_LOADED, FadeFrom);
+		ExperienceManager.StopListening (ExperienceManager.ENVIRONMENT_SET, FadeFrom);
 	}
 
 	// The material should always start as opaque.
@@ -23,9 +23,15 @@ public class FadeTransition : MonoBehaviour {
 		m.color = new Color (m.color.r, m.color.g, m.color.b, 1.0f);
 	}
 
+	void OnDestroy() {
+		m.color = new Color (m.color.r, m.color.g, m.color.b, 1.0f);
+	}
+
 	/* Function: FadeFrom
 	 * Fade from color to transparent */
 	private void FadeFrom() {
+		ExperienceManager.StopListening (ExperienceManager.ENVIRONMENT_SET, FadeFrom);
+
 		StartCoroutine (FadeTo (0.0f, fadeTime));
 	}
 

@@ -50,6 +50,8 @@ public class SpawnPowerItems : MonoBehaviour {
 				spawnedObj.transform.parent = transform;
 			}
 		}
+
+		ExperienceManager.TriggerEvent (ExperienceManager.ENVIRONMENT_SET);
 	}
 
 	private GameObject GetPowerItem() {

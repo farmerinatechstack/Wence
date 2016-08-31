@@ -15,6 +15,8 @@ public class ExperienceManager : MonoBehaviour {
 	// Events: the following are string names for all possible events in the experience
 	public static string INFO_LOADED = "infoLoaded";
 	public static string ENVIRONMENT_SET = "environmentSet";
+	public static string PLEDGE_SELECTED = "pledgeSelected";
+	public static string PLEDGE_HIDDEN = "pledgeHidden";
 
 	public static ExperienceManager instance {
 		get {
@@ -50,8 +52,8 @@ public class ExperienceManager : MonoBehaviour {
 	/* Function: GetPower
 	 * Returns the power of the environment */
 	private int GetPower() {
-		// TODO: read from website to get environment power
-		return 750;
+		Power = SMSManager.Instance.pledgeCount;
+		return Power + 200;
 	}
 
 	public static void StartListening(string eventName, UnityAction listener) {
@@ -73,6 +75,8 @@ public class ExperienceManager : MonoBehaviour {
 	}
 
 	public static void TriggerEvent(string eventName) {
+		print ("Triggering: " + eventName);
+
 		UnityEvent thisEvent = null;
 		if (instance.eventDictionary.TryGetValue (eventName, out thisEvent)) {
 			thisEvent.Invoke ();
