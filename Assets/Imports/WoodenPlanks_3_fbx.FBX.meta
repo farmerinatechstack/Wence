@@ -1,0 +1,198 @@
+fileFormatVersion: 2
+guid: 50d88991928d348709dfbeab3377abd2
+timeCreated: 1472636138
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: WoodenPlank_3_00
+    100002: WoodenPlank_3_01
+    100004: WoodenPlank_3_02
+    100006: WoodenPlank_3_03
+    100008: WoodenPlank_3_04
+    100010: WoodenPlank_3_05
+    100012: WoodenPlank_3_06
+    100014: WoodenPlank_3_07
+    100016: WoodenPlank_3_08
+    100018: WoodenPlank_3_09
+    100020: WoodenPlank_3_10
+    100022: WoodenPlank_3_11
+    100024: WoodenPlank_3_12
+    100026: WoodenPlank_3_13
+    100028: WoodenPlank_3_14
+    100030: WoodenPlank_3_15
+    100032: WoodenPlank_3_16
+    100034: WoodenPlank_3_17
+    100036: WoodenPlank_3_18
+    100038: WoodenPlank_3_19
+    100040: WoodenPlank_3_20
+    100042: WoodenPlank_3_21
+    100044: WoodenPlank_3_22
+    100046: WoodenPlank_3_23
+    100048: WoodenPlank_3_24
+    100050: //RootNode
+    400000: WoodenPlank_3_00
+    400002: WoodenPlank_3_01
+    400004: WoodenPlank_3_02
+    400006: WoodenPlank_3_03
+    400008: WoodenPlank_3_04
+    400010: WoodenPlank_3_05
+    400012: WoodenPlank_3_06
+    400014: WoodenPlank_3_07
+    400016: WoodenPlank_3_08
+    400018: WoodenPlank_3_09
+    400020: WoodenPlank_3_10
+    400022: WoodenPlank_3_11
+    400024: WoodenPlank_3_12
+    400026: WoodenPlank_3_13
+    400028: WoodenPlank_3_14
+    400030: WoodenPlank_3_15
+    400032: WoodenPlank_3_16
+    400034: WoodenPlank_3_17
+    400036: WoodenPlank_3_18
+    400038: WoodenPlank_3_19
+    400040: WoodenPlank_3_20
+    400042: WoodenPlank_3_21
+    400044: WoodenPlank_3_22
+    400046: WoodenPlank_3_23
+    400048: WoodenPlank_3_24
+    400050: //RootNode
+    2300000: WoodenPlank_3_00
+    2300002: WoodenPlank_3_01
+    2300004: WoodenPlank_3_02
+    2300006: WoodenPlank_3_03
+    2300008: WoodenPlank_3_04
+    2300010: WoodenPlank_3_05
+    2300012: WoodenPlank_3_06
+    2300014: WoodenPlank_3_07
+    2300016: WoodenPlank_3_08
+    2300018: WoodenPlank_3_09
+    2300020: WoodenPlank_3_10
+    2300022: WoodenPlank_3_11
+    2300024: WoodenPlank_3_12
+    2300026: WoodenPlank_3_13
+    2300028: WoodenPlank_3_14
+    2300030: WoodenPlank_3_15
+    2300032: WoodenPlank_3_16
+    2300034: WoodenPlank_3_17
+    2300036: WoodenPlank_3_18
+    2300038: WoodenPlank_3_19
+    2300040: WoodenPlank_3_20
+    2300042: WoodenPlank_3_21
+    2300044: WoodenPlank_3_22
+    2300046: WoodenPlank_3_23
+    2300048: WoodenPlank_3_24
+    3300000: WoodenPlank_3_00
+    3300002: WoodenPlank_3_01
+    3300004: WoodenPlank_3_02
+    3300006: WoodenPlank_3_03
+    3300008: WoodenPlank_3_04
+    3300010: WoodenPlank_3_05
+    3300012: WoodenPlank_3_06
+    3300014: WoodenPlank_3_07
+    3300016: WoodenPlank_3_08
+    3300018: WoodenPlank_3_09
+    3300020: WoodenPlank_3_10
+    3300022: WoodenPlank_3_11
+    3300024: WoodenPlank_3_12
+    3300026: WoodenPlank_3_13
+    3300028: WoodenPlank_3_14
+    3300030: WoodenPlank_3_15
+    3300032: WoodenPlank_3_16
+    3300034: WoodenPlank_3_17
+    3300036: WoodenPlank_3_18
+    3300038: WoodenPlank_3_19
+    3300040: WoodenPlank_3_20
+    3300042: WoodenPlank_3_21
+    3300044: WoodenPlank_3_22
+    3300046: WoodenPlank_3_23
+    3300048: WoodenPlank_3_24
+    4300000: WoodenPlank_3_21
+    4300002: WoodenPlank_3_19
+    4300004: WoodenPlank_3_18
+    4300006: WoodenPlank_3_17
+    4300008: WoodenPlank_3_16
+    4300010: WoodenPlank_3_20
+    4300012: WoodenPlank_3_06
+    4300014: WoodenPlank_3_07
+    4300016: WoodenPlank_3_08
+    4300018: WoodenPlank_3_09
+    4300020: WoodenPlank_3_10
+    4300022: WoodenPlank_3_11
+    4300024: WoodenPlank_3_00
+    4300026: WoodenPlank_3_13
+    4300028: WoodenPlank_3_14
+    4300030: WoodenPlank_3_12
+    4300032: WoodenPlank_3_05
+    4300034: WoodenPlank_3_04
+    4300036: WoodenPlank_3_03
+    4300038: WoodenPlank_3_02
+    4300040: WoodenPlank_3_01
+    4300042: WoodenPlank_3_15
+    4300044: WoodenPlank_3_22
+    4300046: WoodenPlank_3_23
+    4300048: WoodenPlank_3_24
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
