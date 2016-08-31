@@ -19,18 +19,19 @@ namespace VRAssets {
 		}
 
 		private void CheckInput() {
-			if (Input.GetButtonDown ("Fire1")) { 	// Touchpad down
-				print("fire 1 pressed");
+
+			// Check for a press down of the fire button
+			if (Input.GetButtonDown ("Fire1")) {
 				if (OnDown != null)
 					OnDown ();
 			}
 
-			if (Input.GetButtonUp ("Fire1")) {		// Touchpad up
+			if (Input.GetButtonUp ("Fire1")) {
 				if (OnUp != null)
 					OnUp ();
 			} 
 
-			if (Input.GetKeyDown(KeyCode.Escape)) {	// Back button down
+			if (Input.GetKeyDown(KeyCode.Escape)) {
 				if (Back != null) 
 					Back ();
 			}

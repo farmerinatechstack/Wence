@@ -3,6 +3,7 @@
 [Oo]bj/
 [Bb]uild
 /[Ll]ibrary/
+Assets/StreamingAssets/*
 sysinfo.txt
 *.stackdump
 *.apk 

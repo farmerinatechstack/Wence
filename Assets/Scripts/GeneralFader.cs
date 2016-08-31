@@ -23,8 +23,6 @@ public class GeneralFader : MonoBehaviour {
 	/* Function: FadeFrom
 	 * Fade from color to transparent */
 	public void FadeFrom() {
-		ExperienceManager.StopListening (ExperienceManager.ENVIRONMENT_SET, FadeFrom);
-
 		StartCoroutine (FadeTo (0.0f, fadeTime));
 	}
 
