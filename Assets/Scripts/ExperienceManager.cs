@@ -54,7 +54,7 @@ public class ExperienceManager : MonoBehaviour {
 	/* Function: SetPower
 	 * Sets the power and power percentage of the environment */
 	private void SetPower() {
-		Power = SMSManager.pledgeCount + 350;
+		Power = SMSManager.pledgeCount + 900;
 		PowerRatio = (float)Power / (float)MAX_POWER;
 	}
 
