@@ -70,9 +70,9 @@ public class SMSManager : MonoBehaviour {
 			ParseData (stock_pledges [i], false);
 		}
 
-		StartCoroutine (GetPledgeCount ());
-		StartCoroutine (LoadPledges ());
-		StartCoroutine (CheckPledgesPeriodically ());
+		//StartCoroutine (GetPledgeCount ());
+		//StartCoroutine (LoadPledges ());
+		//StartCoroutine (CheckPledgesPeriodically ());
 	}
 
 	void Update() {
@@ -96,7 +96,7 @@ public class SMSManager : MonoBehaviour {
 	IEnumerator GetPledgeCount() {
 		WWW www = new WWW (COUNT_URL);
 		yield return www;
-		yield return new WaitForFixedUpdate (); //align with update frame
+		//yield return new WaitForFixedUpdate (); //align with update frame
 
 		pledgeCount = int.Parse (www.text);
 		countedPledges = true;
@@ -105,7 +105,7 @@ public class SMSManager : MonoBehaviour {
 	IEnumerator LoadPledges() {
 		WWW www = new WWW (LOAD_URL);
 		yield return www;
-		yield return new WaitForFixedUpdate (); //align with update frame
+		//yield return new WaitForFixedUpdate (); //align with update frame
 		ParseData (www.text, false);
 		loadedPledges = true;
 	}
@@ -114,7 +114,7 @@ public class SMSManager : MonoBehaviour {
 		while (true) {
 			WWW www = new WWW (PERIODIC_URL);
 			yield return www;
-			yield return new WaitForFixedUpdate (); //align with update frame
+			//yield return new WaitForFixedUpdate (); //align with update frame
 			ParseData (www.text, true);
 			yield return new WaitForSeconds (PingWaitTime);
 		}

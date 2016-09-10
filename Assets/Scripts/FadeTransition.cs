@@ -57,7 +57,9 @@ public class FadeTransition : MonoBehaviour {
 	}
 
 	IEnumerator DelayReturnToStart() {
-		yield return new WaitForSeconds (freeTime);
+		while (true) {
+			yield return new WaitForSeconds (freeTime);
+		}
 		FadeTo ();
 		yield return new WaitForSeconds (fadeTime);
 		SceneManager.LoadScene ("WenceTitle");
