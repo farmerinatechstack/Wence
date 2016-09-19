@@ -8,37 +8,26 @@ using System.Collections;
 public class FadeTransition : MonoBehaviour {
 	public Material m;
 	public float fadeTime = 2.5f;	// Time to fade
-	public float freeTime = 60f;
 
-	private void OnEnable() {
-		ExperienceManager.StartListening (ExperienceManager.ENVIRONMENT_SET, FadeFrom);
-	}
-
-	private void OnDisable() {
-		ExperienceManager.StopListening (ExperienceManager.ENVIRONMENT_SET, FadeFrom);
-	}
-
-	// The material should always start as opaque.
+	// The material should always start as opaque, and fade in.
 	void Start () {
 		m.color = new Color (m.color.r, m.color.g, m.color.b, 1.0f);
-		StartCoroutine (DelayReturnToStart ());
+		m.renderQueue = 4000; // The overlay level.
 	}
 
 	void OnDestroy() {
 		m.color = new Color (m.color.r, m.color.g, m.color.b, 1.0f);
 	}
 
-	/* Function: FadeFrom
+	/* Function: FadeIn
 	 * Fade from color to transparent */
-	private void FadeFrom() {
-		ExperienceManager.StopListening (ExperienceManager.ENVIRONMENT_SET, FadeFrom);
-
+	public void FadeIn() {
 		StartCoroutine (FadeTo (0.0f, fadeTime));
 	}
 
 	/* Function: FadeTo
 	 * Fade to black from transparent */
-	void FadeTo() {
+	public void FadeOut() {
 		StartCoroutine (FadeTo(1.0f, fadeTime));
 	}
 
@@ -54,14 +43,5 @@ public class FadeTransition : MonoBehaviour {
 
 		Color finalColor = new Color(m.color.r, m.color.g, m.color.b, targetAlpha);
 		m.color = finalColor;		// Set the alpha to the target alpha
-	}
-
-	IEnumerator DelayReturnToStart() {
-		while (true) {
-			yield return new WaitForSeconds (freeTime);
-		}
-		FadeTo ();
-		yield return new WaitForSeconds (fadeTime);
-		SceneManager.LoadScene ("WenceTitle");
 	}
 }

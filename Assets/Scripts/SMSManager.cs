@@ -51,7 +51,6 @@ public class SMSManager : MonoBehaviour {
 			id = i;
 			pledge = p;
 
-			print(d + ": " + p);
 			DateTime dateTime = Convert.ToDateTime(d);
 			if (dateTime == DateTime.Today) {
 				time = "Today";
@@ -66,60 +65,84 @@ public class SMSManager : MonoBehaviour {
 	}
 
 	void Awake() {
+		DontDestroyOnLoad (transform.gameObject);
+
 		for (int i = 0; i < stock_pledges.Length; i++) {
 			ParseData (stock_pledges [i], false);
 		}
+	}
 
-		//StartCoroutine (GetPledgeCount ());
-		//StartCoroutine (LoadPledges ());
-		//StartCoroutine (CheckPledgesPeriodically ());
+	private void OnEnable() {
+		ExperienceManager.StartListening (ExperienceManager.WAITING_FOR_PLEDGES, ActivateSMSLoads);
+		ExperienceManager.StartListening (ExperienceManager.WAITING_FOR_SHIFT, AlertOnLoad);
+
+	}
+
+	private void OnDisable() {
+		ExperienceManager.StopListening (ExperienceManager.WAITING_FOR_PLEDGES, ActivateSMSLoads);
+		ExperienceManager.StartListening (ExperienceManager.WAITING_FOR_SHIFT, AlertOnLoad);
+
 	}
 
 	void Update() {
-		if (countedPledges && loadedPledges && !calledLoad) { 	// Alert rest of the scene that information has been loaded
-			ExperienceManager.TriggerEvent (ExperienceManager.INFO_LOADED);
-			calledLoad = true;
-		}
-
 		if (Input.GetKeyDown (KeyCode.P)) {
 			print ("Loaded pledges:");
 			for (int i = 0; i < pledges.Count; i++) {
-				print (pledges [i].pledge + " - " + pledges [i].time);
+				Debug.Log (pledges [i].pledge + " - " + pledges [i].time);
 			}
 			print ("Recent pledges:");
 			for (int j = 0; j < recentPledges.Count; j++) {
-				print (recentPledges [j].pledge + " - " + pledges [j].time);
+				Debug.Log (recentPledges [j].pledge + " - " + pledges [j].time);
 			}
 		}
 	}
 
-	IEnumerator GetPledgeCount() {
+	private void AlertOnLoad() {
+		StartCoroutine (WaitForLoad ());
+	}
+
+	IEnumerator WaitForLoad() {
+		while (!countedPledges || !loadedPledges) {
+			yield return new WaitForSeconds (1f);
+		}
+
+		ExperienceManager.TriggerEvent (ExperienceManager.INFO_LOADED);
+	}
+
+	private void ActivateSMSLoads() {
+		Debug.Log ("Activating SMS Coroutines");
+
+		StartCoroutine (LoadCount ());
+		StartCoroutine (LoadPledges ());
+		StartCoroutine (LoadPeriodically ());
+	}
+
+	IEnumerator LoadCount() {				// Loads total count of pledges.
 		WWW www = new WWW (COUNT_URL);
 		yield return www;
-		//yield return new WaitForFixedUpdate (); //align with update frame
 
 		pledgeCount = int.Parse (www.text);
 		countedPledges = true;
 	}
 
-	IEnumerator LoadPledges() {
+	IEnumerator LoadPledges() { 			// Loads the last 100 pledges.
 		WWW www = new WWW (LOAD_URL);
 		yield return www;
-		//yield return new WaitForFixedUpdate (); //align with update frame
 		ParseData (www.text, false);
 		loadedPledges = true;
 	}
 
-	IEnumerator CheckPledgesPeriodically() {
+	IEnumerator LoadPeriodically() { 		// Loads new pledges periodically.
 		while (true) {
 			WWW www = new WWW (PERIODIC_URL);
 			yield return www;
-			//yield return new WaitForFixedUpdate (); //align with update frame
 			ParseData (www.text, true);
 			yield return new WaitForSeconds (PingWaitTime);
 		}
 	}
 
+	/* Function: ParseData
+	 * Parses a string of pledge data. If parsingRecentPledges is true, the pledges are added to the list of recents. */
 	private void ParseData(string data, bool parsingRecentPledges) {
 		string[] texts = data.Split(new string[] { ParseKey }, StringSplitOptions.None);
 		for(int i = 1; i < texts.Length; i++) { //skip the first one empty space
@@ -132,6 +155,7 @@ public class SMSManager : MonoBehaviour {
 					continue;
 				sData.time = "Just Now";
 				recentPledges.Add (sData);
+				ExperienceManager.TriggerEvent (ExperienceManager.HANDLE_RECENT_PLEDGE);
 			} else {
 				pledges.Add (sData);
 			}
@@ -140,8 +164,6 @@ public class SMSManager : MonoBehaviour {
 	}
 
 	public static SMSData GetRandomPledgeText () {
-		print ("Getting text");
-
 		if (recentPledges.Count == 0 && pledges.Count == 0) {
 			return null;
 		}

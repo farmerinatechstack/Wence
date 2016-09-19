@@ -3,30 +3,33 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class SwapScene : MonoBehaviour {
-	[SerializeField] GeneralFader fader;
+	[SerializeField] FadeTransition trans;
 
-	AsyncOperation async;
+	AsyncOperation asyncLoad;
 
 	private void Start() {
-		StartCoroutine("load");
+		trans.FadeIn ();
+
+		asyncLoad = Application.LoadLevelAsync("WenceVideo");
+		asyncLoad.allowSceneActivation = false;
 	}
 
 	private void Update() {
 		if (Input.GetButtonDown ("Fire1")) { 	// Touchpad down
-			// Swap scene
-			fader.FadeTo();
 			StartCoroutine (Swap());
 		}
 	}
 
 	IEnumerator Swap() {
-		yield return new WaitForSeconds (fader.fadeTime);
-		async.allowSceneActivation = true;
-	}
+		while (!asyncLoad.isDone) {
+			float progress = asyncLoad.progress / 0.9f;
+			yield return null;
 
-	IEnumerator load() {
-		async = Application.LoadLevelAsync("WenceVideo");
-		async.allowSceneActivation = false;
-		yield return async;
+			if (Mathf.Approximately(asyncLoad.progress, 0.9f)) {
+				trans.FadeOut ();
+				yield return new WaitForSeconds (trans.fadeTime);
+				asyncLoad.allowSceneActivation = true;
+			}
+		}
 	}
 }
