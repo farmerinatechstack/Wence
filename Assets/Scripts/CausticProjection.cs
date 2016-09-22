@@ -3,7 +3,7 @@ using System.Collections;
 
 public class CausticProjection : MonoBehaviour
 {
-	public float fps = 30.0f;
+	public float fps = 15.0f;
 	public Texture2D[] frames;
 	private int frameIndex;
 	private Projector projector;
