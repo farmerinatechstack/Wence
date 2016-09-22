@@ -40,7 +40,7 @@ v2f vert(appdata v)
 
 	// scroll bump waves
 	float4 temp;
-	float4 wpos = mul (unity_ObjectToWorld, v.vertex);
+	float4 wpos = mul (_Object2World, v.vertex);
 	temp.xyzw = wpos.xzxz * _WaveScale + _WaveOffset;
 	o.bumpuv[0] = temp.xy * float2(.4, .45);
 	o.bumpuv[1] = temp.wz;
@@ -71,7 +71,7 @@ half4 frag( v2f i ) : COLOR
 {
 	half3 bump1 = UnpackNormal(tex2D( _BumpMap, i.bumpuv[0] )).rgb;
 	half3 bump2 = UnpackNormal(tex2D( _BumpMap, i.bumpuv[1] )).rgb;
-	half3 bump = (bump1 + bump2) * 0.5;
+	half3 bump = (bump1 + bump2) * -0.5;
 	
 	half fresnel = dot( i.viewDir, bump );
 	half4 water = tex2D( _ColorControl, float2(fresnel,fresnel) );
