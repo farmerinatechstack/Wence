@@ -4,11 +4,10 @@ using System.Collections;
 public class FogAdjustment : MonoBehaviour {
 	[SerializeField] Color downColor;
 	[SerializeField] Color upColor;
-	[SerializeField] Material backgroundMaterial;
+	[SerializeField] Camera cam;
 
-	private Color originalMaterialColor;
-	private int numTimeSteps = 50;
-	private float secondsPerStep = 0.03f;
+	private int numTimeSteps = 100;
+	private float secondsPerStep = 0.05f;
 
 	private void Update() {
 		if (Input.GetKeyDown (KeyCode.G)) {
@@ -26,14 +25,8 @@ public class FogAdjustment : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		originalMaterialColor = backgroundMaterial.color;
-
-		backgroundMaterial.color = downColor;
+		cam.backgroundColor = downColor;
 		RenderSettings.fogColor = downColor;
-	}
-
-	void OnDestroy() {
-		backgroundMaterial.color = originalMaterialColor;
 	}
 
 	void StartShift() {
@@ -43,9 +36,11 @@ public class FogAdjustment : MonoBehaviour {
 	/* Function: ShiftEnvironment
 	 * Shifts the fog and environment color from the lowest level to the current based on power ratio. */
 	private IEnumerator ShiftEnvironment() {
-		Color finalColor = Color.Lerp (downColor, upColor, ExperienceManager.PowerRatio);
+		//Color finalColor = Color.Lerp (downColor, upColor, ExperienceManager.PowerRatio);
+		Color finalColor = upColor;
 		float startDensity = RenderSettings.fogDensity;
-		float finalDensity = RenderSettings.fogDensity - (ExperienceManager.PowerRatio) / 10;
+		//float finalDensity = RenderSettings.fogDensity - (ExperienceManager.PowerRatio) / 10;
+		float finalDensity = 0.2f;
 
 		for (int timeStep = 1; timeStep <= numTimeSteps; timeStep++) {
 			Color currColor = Color.Lerp (downColor, finalColor, (1.0f * timeStep / numTimeSteps));
@@ -54,10 +49,10 @@ public class FogAdjustment : MonoBehaviour {
 
 			RenderSettings.fogDensity = currDensity;
 			RenderSettings.fogColor = currColor;
-			backgroundMaterial.color = currColor;
+			cam.backgroundColor = currColor;
 			Debug.Log ("Taking fog step. Density " + currDensity);
-			if (timeStep > numTimeSteps / 3) { 	// Slow the transition after the initial speedy transition.
-				yield return new WaitForSeconds (secondsPerStep * 20f);
+			if (timeStep > numTimeSteps / 2) { 	// Slow the transition after the initial speedy transition.
+				yield return new WaitForSeconds (secondsPerStep * 5f);
 			} else {							// Start with a fast transition
 				yield return new WaitForSeconds (secondsPerStep);
 			}
