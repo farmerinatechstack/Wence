@@ -61,13 +61,18 @@ public class ExperienceManager : MonoBehaviour {
 	private void SetPower() {
 		Power = SMSManager.pledgeCount + powerOffset;
 		PowerRatio = (float)Power / (float)MAX_POWER;
+
+		if (Power < 500) {
+			Power = 500;
+			PowerRatio = 0.5f;
+		}
 	}
 
 	/* Function: SetPower
 	 * Handles the detection of a recent pledge */
 	private void HandleRecent() {
-		Power += 500;
-		PowerRatio += 0.5f;
+		Power += 200;
+		PowerRatio += 0.2f;
 	}
 
 	public static int GetPower() {
