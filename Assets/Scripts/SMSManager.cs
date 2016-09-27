@@ -4,17 +4,18 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class SMSManager : MonoBehaviour {
-	public static int pledgeCount;
+	public static int pledgePower;
 
-	[SerializeField] bool countedPledges = false;
+	[SerializeField] bool gotPower = false;
 	[SerializeField] bool loadedPledges = false;
 	private bool calledLoad = false;
 
 	private const string ParseKey = "Pledge2254:";
 	private const float PingWaitTime = 5f;
 
-	private const string COUNT_URL = "http://wence.herokuapp.com/get_pledge_count";
-	private const string LOAD_URL = "http://wence.herokuapp.com/last_100";
+	private const string COUNT_URL = 	"http://wence.herokuapp.com/get_pledge_count";
+	private const string POWER_URL = 	"http://wence.herokuapp.com/get_power_exponential";
+	private const string LOAD_URL = 	"http://wence.herokuapp.com/last_100";
 	private const string PERIODIC_URL = "http://wence.herokuapp.com/last_minute";
 
 	string[] stock_pledges = new string[] {
@@ -22,9 +23,8 @@ public class SMSManager : MonoBehaviour {
 		"Pledge2254:0:I will only buy seafood from sustainable fisheries.:08/30/2016", 
 		"Pledge2254:0:Next time I go to the beach, I am going to meditate and take in the beauty.:08/30/2016", 
 		"Pledge2254:0:I will go surfing more and become closer to the sea.:08/30/2016",
-		"Pledge2254:0:I am going to fish so I can understand more of the issues.:08/30/2016",
-		"Pledge2254:0:Next time I drink water, I'll think about where it comes from.:08/30/2016"
-
+		"Pledge2254:0:I am going to fish for my own food.:08/30/2016",
+		"Pledge2254:0:Next time I drink water, I won't waste any.:08/30/2016"
 	};
 
 
@@ -74,14 +74,14 @@ public class SMSManager : MonoBehaviour {
 
 	private void OnEnable() {
 		ExperienceManager.StartListening (ExperienceManager.WAITING_FOR_PLEDGES, ActivateSMSLoads);
-		ExperienceManager.StartListening (ExperienceManager.WAITING_FOR_SHIFT, AlertOnLoad);
-
 	}
 
 	private void OnDisable() {
 		ExperienceManager.StopListening (ExperienceManager.WAITING_FOR_PLEDGES, ActivateSMSLoads);
-		ExperienceManager.StartListening (ExperienceManager.WAITING_FOR_SHIFT, AlertOnLoad);
+	}
 
+	void Start() {
+		AlertOnLoad ();
 	}
 
 	void Update() {
@@ -102,7 +102,7 @@ public class SMSManager : MonoBehaviour {
 	}
 
 	IEnumerator WaitForLoad() {
-		while (!countedPledges || !loadedPledges) {
+		while (!gotPower || !loadedPledges) {
 			yield return new WaitForSeconds (1f);
 		}
 
@@ -112,17 +112,17 @@ public class SMSManager : MonoBehaviour {
 	private void ActivateSMSLoads() {
 		Debug.Log ("Activating SMS Coroutines");
 
-		StartCoroutine (LoadCount ());
+		StartCoroutine (LoadPower ());
 		StartCoroutine (LoadPledges ());
 		StartCoroutine (LoadPeriodically ());
 	}
 
-	IEnumerator LoadCount() {				// Loads total count of pledges.
-		WWW www = new WWW (COUNT_URL);
+	IEnumerator LoadPower() {				// Loads total count of pledges.
+		WWW www = new WWW (POWER_URL);
 		yield return www;
 
-		pledgeCount = int.Parse (www.text);
-		countedPledges = true;
+		pledgePower = int.Parse (www.text);
+		gotPower = true;
 	}
 
 	IEnumerator LoadPledges() { 			// Loads the last 100 pledges.

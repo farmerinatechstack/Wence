@@ -26,8 +26,6 @@ public class PledgeDisplay : MonoBehaviour {
 
 	private void TogglePledge() {
 		if (!onDisplay) {
-			// TODO: Get pledge info
-
 			anim.Play ("Show");
 			StartCoroutine (DelayedHide());
 		} else {
