@@ -35,7 +35,6 @@ public class ManageSceneView : MonoBehaviour {
 		// Wait for the asynchronous load to finish if still incomplete, log progress.
 		while (!asyncLoad.isDone) {
 			float progress = (asyncLoad.progress / 0.9f) * 100f;
-			Debug.Log (sceneName + " load progress: " + progress);
 
 			if (Mathf.Approximately (asyncLoad.progress, 0.9f)) { // Scene is ready for activation at 0.9f
 				blindPlane.SetActive (true);

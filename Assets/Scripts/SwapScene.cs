@@ -5,13 +5,16 @@ using System.Collections;
 public class SwapScene : MonoBehaviour {
 	[SerializeField] FadeTransition trans;
 	[SerializeField] GameObject fader;
+	[SerializeField] string sceneName;
 
 	AsyncOperation asyncLoad;
 
 	private void Start() {
-		StartCoroutine (ActivateFader ());
+		if (trans != null && fader != null) {
+			StartCoroutine (ActivateFader ());
+		}
 
-		asyncLoad = Application.LoadLevelAsync("WenceVideo");
+		asyncLoad = Application.LoadLevelAsync(sceneName);
 		asyncLoad.allowSceneActivation = false;
 	}
 
@@ -34,9 +37,11 @@ public class SwapScene : MonoBehaviour {
 			yield return null;
 
 			if (Mathf.Approximately(asyncLoad.progress, 0.9f)) {
-				fader.SetActive (true);
-				trans.FadeOut ();
-				yield return new WaitForSeconds (trans.fadeTime);
+				if (trans != null && fader != null) {
+					fader.SetActive (true);
+					trans.FadeOut ();
+					yield return new WaitForSeconds (trans.fadeTime);
+				}
 				asyncLoad.allowSceneActivation = true;
 			}
 		}
