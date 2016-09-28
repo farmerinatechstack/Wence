@@ -32,10 +32,16 @@ public class ManageSceneView : MonoBehaviour {
 		// Wait for the user to observe the scene.
 		yield return new WaitForSeconds (transitionTime);
 
+		StartCoroutine (TransitionScene ());
+	}
+
+	public void TransitionEarly() {
+		StartCoroutine (TransitionScene ());
+	}
+
+	IEnumerator TransitionScene() {
 		// Wait for the asynchronous load to finish if still incomplete, log progress.
 		while (!asyncLoad.isDone) {
-			float progress = (asyncLoad.progress / 0.9f) * 100f;
-
 			if (Mathf.Approximately (asyncLoad.progress, 0.9f)) { // Scene is ready for activation at 0.9f
 				blindPlane.SetActive (true);
 				trans.FadeOut ();

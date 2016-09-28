@@ -13,9 +13,4 @@ public class PromptManager : MonoBehaviour {
 	void Start() {
 		ExperienceManager.TriggerEvent (ExperienceManager.WAITING_FOR_PLEDGES);
 	}
-
-	// Update is called once per frame
-	void Update () {
-	
-	}
 }
