@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.VR;
 using System.Collections;
 
 public class DelayedTextAndSkip : MonoBehaviour {
+	[SerializeField] AudioSource chimeSource;
 	[SerializeField] Text textToEnable;
 	[SerializeField] ManageSceneView sceneManager;
 
@@ -11,12 +13,13 @@ public class DelayedTextAndSkip : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		Invoke ("EnableTextSkip", 20f);
+		Invoke ("EnableTextSkip", 10f);
 	}
 
 	void Update() {
-		if (readyToSkip && Input.GetButtonDown ("Fire1")) {
+		if (VRDevice.isPresent && readyToSkip && Input.GetButtonDown ("Fire1")) {
 			sceneManager.TransitionEarly ();
+			chimeSource.Play ();
 		}
 	}
 	

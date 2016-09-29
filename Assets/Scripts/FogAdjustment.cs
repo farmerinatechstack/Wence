@@ -7,7 +7,7 @@ public class FogAdjustment : MonoBehaviour {
 	[SerializeField] Camera cam;
 
 	private int numTimeSteps = 100;
-	private float secondsPerStep = 0.05f;
+	private float secondsPerStep = 0.08f;
 
 	// Use this for initialization
 	void Start () {
@@ -40,6 +40,7 @@ public class FogAdjustment : MonoBehaviour {
 		Color finalColor = Color.Lerp (downColor, upColor, ExperienceManager.PowerRatio);
 		float startDensity = RenderSettings.fogDensity;
 		float finalDensity = RenderSettings.fogDensity - (ExperienceManager.PowerRatio) / 10;
+		yield return new WaitForSeconds (4.0f);
 
 		for (int timeStep = 1; timeStep <= numTimeSteps; timeStep++) {
 			Color currColor = Color.Lerp (downColor, finalColor, (1.0f * timeStep / numTimeSteps));
@@ -48,11 +49,7 @@ public class FogAdjustment : MonoBehaviour {
 			RenderSettings.fogDensity = currDensity;
 			RenderSettings.fogColor = currColor;
 			cam.backgroundColor = currColor;
-			if (timeStep > numTimeSteps / 2) { 	// Slow the transition after the initial speedy transition.
-				yield return new WaitForSeconds (secondsPerStep * 5f);
-			} else {							// Start with a fast transition
-				yield return new WaitForSeconds (secondsPerStep);
-			}
+			yield return new WaitForSeconds (secondsPerStep);
 		}
 	}
 }

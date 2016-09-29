@@ -15,7 +15,7 @@ public class DelayedSwap : MonoBehaviour {
 		StartCoroutine (ActivateFader ());
 		StartCoroutine (WaitToSwap ());
 
-		asyncLoad = Application.LoadLevelAsync(destinationSceneName);
+		asyncLoad = SceneManager.LoadSceneAsync(destinationSceneName);
 		asyncLoad.allowSceneActivation = false;
 	}
 

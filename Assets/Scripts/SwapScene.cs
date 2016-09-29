@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class SwapScene : MonoBehaviour {
+	[SerializeField] AudioSource chimeSource;
 	[SerializeField] FadeTransition trans;
 	[SerializeField] GameObject fader;
 	[SerializeField] string sceneName;
@@ -14,13 +15,14 @@ public class SwapScene : MonoBehaviour {
 			StartCoroutine (ActivateFader ());
 		}
 
-		asyncLoad = Application.LoadLevelAsync(sceneName);
+		asyncLoad = SceneManager.LoadSceneAsync(sceneName);
 		asyncLoad.allowSceneActivation = false;
 	}
 
 	private void Update() {
 		if (Input.GetButtonDown ("Fire1")) { 	// Touchpad down
 			StartCoroutine (Swap());
+			chimeSource.Play ();
 		}
 	}
 

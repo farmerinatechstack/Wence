@@ -67,7 +67,8 @@ public class ExperienceManager : MonoBehaviour {
 	/* Function: SetPower
 	 * Sets the power and power ratio of the environment */
 	private void SetPower() {
-		Power = SMSManager.pledgePower > 400 ? SMSManager.pledgePower : (400 + SMSManager.pledgePower / 2);
+		Power = SMSManager.pledgePower > 500 ? SMSManager.pledgePower : (500 + SMSManager.pledgePower);
+		Power = Mathf.Clamp (Power, 0, 1000);
 		PowerRatio = Mathf.Clamp ((float)Power / (float)MAX_POWER, 0.0f, 1.0f);
 
 		experienceReady = true;
