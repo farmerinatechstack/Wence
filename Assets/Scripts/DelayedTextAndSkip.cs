@@ -6,25 +6,26 @@ using System.Collections;
 
 public class DelayedTextAndSkip : MonoBehaviour {
 	[SerializeField] AudioSource chimeSource;
+	[SerializeField] SwapScene swapper;
 	[SerializeField] Text textToEnable;
-	[SerializeField] ManageSceneView sceneManager;
-
-	private bool readyToSkip = false;
 
 	// Use this for initialization
 	void Start () {
-		Invoke ("EnableTextSkip", 10f);
+		textToEnable.enabled = false;
+		Invoke ("TimeElapsed", 25f);
 	}
 
 	void Update() {
-		if (VRDevice.isPresent && readyToSkip && Input.GetButtonDown ("Fire1")) {
-			sceneManager.TransitionEarly ();
-			chimeSource.Play ();
+		if (VRDevice.isPresent && Input.GetButtonDown ("Fire1") && textToEnable.enabled) {
+			swapper.ExecuteSwap ();
 		}
 	}
-	
-	void EnableTextSkip() {
+
+	void OnApplicationPause(bool pauseStatus) {
 		textToEnable.enabled = true;
-		readyToSkip = true;
+	}
+
+	void TimeElapsed() {
+		textToEnable.enabled = true;
 	}
 }

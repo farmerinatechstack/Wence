@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class Countdown : MonoBehaviour {
-	[SerializeField] int countdownTime = 60;
+	[SerializeField] int countdownTime;
 	[SerializeField] Text countdownText;
 
 	// Use this for initialization
@@ -13,7 +13,7 @@ public class Countdown : MonoBehaviour {
 
 	IEnumerator startCountdown() {
 		while (countdownTime >= 0) {
-			countdownText.text = countdownTime.ToString();
+			countdownText.text = countdownTime.ToString() + "s";
 			yield return new WaitForSeconds (1.0f);
 			countdownTime--;
 		}

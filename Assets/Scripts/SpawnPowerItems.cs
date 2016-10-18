@@ -18,18 +18,10 @@ public class SpawnPowerItems : MonoBehaviour {
 
 	private void Awake() {
 		powerItems = new List<GameObject> (lowPowerItems);
-		if (ExperienceManager.Power >= powerThreshold) powerItems.AddRange (highPowerItems);
+		if (SMSManager.Power >= powerThreshold) powerItems.AddRange (highPowerItems);
 
 		playerPosition = GameObject.FindGameObjectWithTag ("MainCamera").transform.position;
 		playerPosition.y = 0.5f;
-	}
-
-	private void OnEnable() {
-		ExperienceManager.StartListening (ExperienceManager.INFO_LOADED, SpawnItems);
-	}
-
-	private void OnDisable() {
-		ExperienceManager.StopListening (ExperienceManager.INFO_LOADED, SpawnItems);
 	}
 
 	/* Function: SpawnItems
@@ -50,12 +42,10 @@ public class SpawnPowerItems : MonoBehaviour {
 				spawnedObj.transform.parent = transform;
 			}
 		}
-
-		ExperienceManager.TriggerEvent (ExperienceManager.ENVIRONMENT_SET);
 	}
 
 	private GameObject GetPowerItem() {
-		if (Random.Range(0, ExperienceManager.MAX_POWER) <= ExperienceManager.Power) {
+		if (Random.Range(0, SMSManager.MAX_POWER) <= SMSManager.Power) {
 			return powerItems[Random.Range(0,powerItems.Count)];
 		} else {
 			return trashPowerItems[Random.Range(0,trashPowerItems.Count)];

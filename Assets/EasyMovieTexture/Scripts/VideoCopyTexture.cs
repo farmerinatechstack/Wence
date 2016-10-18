@@ -8,7 +8,8 @@ public class VideoCopyTexture : MonoBehaviour {
 	void Start () {
 	
 	}
-	
+
+	#if !UNITY_WEBGL
 	// Update is called once per frame
 	void Update () {
 		
@@ -29,4 +30,5 @@ public class VideoCopyTexture : MonoBehaviour {
 		}
 	
 	}
+	#endif
 }

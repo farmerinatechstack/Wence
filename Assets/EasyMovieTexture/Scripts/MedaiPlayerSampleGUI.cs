@@ -2,7 +2,8 @@ using UnityEngine;
 using System.Collections;
 
 public class MedaiPlayerSampleGUI : MonoBehaviour {
-	
+
+
 	public MediaPlayerCtrl scrMedia;
 	
 	public bool m_bFinish = false;
@@ -19,11 +20,15 @@ public class MedaiPlayerSampleGUI : MonoBehaviour {
 
 	
 	}
-	
+	#if !UNITY_WEBGL
 	void OnGUI() {
 		
 	
-		if( GUI.Button(new Rect(50,50,100,100),"Load"))
+		if( GUI.Button(new Rect(50,50,100,100),"LoadScene"))
+		{
+			Application.LoadLevel (1);
+		}
+		/*if( GUI.Button(new Rect(50,50,100,100),"Load"))
 		{
 			scrMedia.Load("EasyMovieTexture.mp4");
 			m_bFinish = false;
@@ -87,15 +92,23 @@ public class MedaiPlayerSampleGUI : MonoBehaviour {
 		if( GUI.Button(new Rect(200,650,100,100),scrMedia.GetCurrentSeekPercent().ToString()))
 		{
 			
-		}
+		}*/
 	
 
 	}
+	#endif
 
 
+	int iCount = 1;
 	
 	void OnEnd()
 	{
-		m_bFinish = true;
+		iCount++;
+		
+		if (iCount == 2) {
+			scrMedia.Load ("test2.mp4");
+		} else if (iCount == 3) {
+			scrMedia.Load ("test3.mp4");
+		}
 	}
 }

@@ -2,35 +2,66 @@
 using UnityEngine.SceneManagement;
 using System.Collections;
 
+/* Class: SwapScene
+ * Swaps to sceneName on event or after a set time. Uses a fade
+ * transition if provided.
+ */
 public class SwapScene : MonoBehaviour {
-	[SerializeField] AudioSource chimeSource;
-	[SerializeField] FadeTransition trans;
-	[SerializeField] GameObject fader;
+	[SerializeField] FadeMaterial transitionFader;
 	[SerializeField] string sceneName;
+	[SerializeField] bool transitionByEvent;
+	[SerializeField] float transitionTime;
 
 	AsyncOperation asyncLoad;
 
+	private void OnEnable() {
+		VRInput.OnInputDown += HandleSwap;
+	}
+
+	private void OnDisable() {
+		VRInput.OnInputDown -= HandleSwap;
+	}
+
 	private void Start() {
-		if (trans != null && fader != null) {
-			StartCoroutine (ActivateFader ());
+		if (!string.IsNullOrEmpty(sceneName)) {
+			asyncLoad = SceneManager.LoadSceneAsync(sceneName);
+			asyncLoad.allowSceneActivation = false;
+		} else {
+			Debug.LogError ("No transition scene detected");
 		}
 
-		asyncLoad = SceneManager.LoadSceneAsync(sceneName);
-		asyncLoad.allowSceneActivation = false;
+		if (transitionFader) {
+			transitionFader.FadeIn ();
+		} else {
+			Debug.LogWarning ("No transition fader detected");
+		}
+		
+		if (!transitionByEvent)
+			StartCoroutine (WaitToTransition ());
 	}
 
-	private void Update() {
-		if (Input.GetButtonDown ("Fire1")) { 	// Touchpad down
-			StartCoroutine (Swap());
-			chimeSource.Play ();
+	void Update() {
+		#if UNITY_EDITOR
+		if (Input.GetKeyDown(KeyCode.Space)) {
+			ExecuteSwap();
+		}
+		#endif
+	}
+
+	private void HandleSwap() {
+		if (transitionByEvent) {
+			ExecuteSwap ();
 		}
 	}
 
-	IEnumerator ActivateFader() {
-		trans.FadeIn ();
-		yield return new WaitForSeconds (trans.fadeTime);
+	public void ExecuteSwap() {
+		VRInput.enableInput = false;
+		StartCoroutine (Swap ());
+	}
 
-		fader.SetActive (false);
+	IEnumerator WaitToTransition() {
+		yield return new WaitForSeconds (transitionTime);
+		StartCoroutine (Swap ());
 	}
 
 	IEnumerator Swap() {
@@ -38,13 +69,15 @@ public class SwapScene : MonoBehaviour {
 			float progress = asyncLoad.progress / 0.9f;
 			yield return null;
 
-			if (Mathf.Approximately(asyncLoad.progress, 0.9f)) {
-				if (trans != null && fader != null) {
-					fader.SetActive (true);
-					trans.FadeOut ();
-					yield return new WaitForSeconds (trans.fadeTime);
+			if (Mathf.Approximately (asyncLoad.progress, 0.9f)) {
+				if (transitionFader) {
+					transitionFader.FadeOut ();
+					yield return new WaitForSeconds (transitionFader.fadeTime);
 				}
 				asyncLoad.allowSceneActivation = true;
+			} else {
+				Debug.LogWarning ("Still loading to swap scene...");
+				yield return new WaitForSeconds (1.0f);
 			}
 		}
 	}

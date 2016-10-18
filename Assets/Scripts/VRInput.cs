@@ -1,45 +1,42 @@
 ﻿using UnityEngine;
 using System;
 
-namespace VRAssets {
-	// Encapsulates VR inputs.
-	public class VRInput : MonoBehaviour {
-		public event Action Back;		// Called on press down of back button
-		public event Action OnDown; 	// Called on press down of Fire1
-		public event Action OnUp; 		// Called on release of Fire1
+// Singleton handling VR inputs
+public class VRInput : MonoBehaviour {
+	public static VRInput Instance;
+	public static bool enableInput = true;
 
-		// Use this for initialization
-		void Start () {
-		
+	[SerializeField] AudioSource src;
+
+	// VR inpus to subscribe to
+	public static event Action OnInputDown;		// Called on press down of Fire1
+
+	// Guarantee a singleton
+	void Awake () {
+		if (!Instance) {
+			Instance = this;
+		} else {
+			Debug.LogError ("Multiple VRInputs detected, destroying gameObject: " + gameObject.name);
+			Destroy (gameObject);
 		}
-		
-		// Update is called once per frame
-		void Update () {
+	}
+
+	// Update is called once per frame
+	void Update () {
+		if (enableInput)
 			CheckInput();
+	}
+
+	private void CheckInput() {
+		// Check for a press down of the fire button
+		if (Input.GetButtonDown ("Fire1")) {
+			if (OnInputDown != null)
+				src.Play ();
+				OnInputDown ();
 		}
+	}
 
-		private void CheckInput() {
-
-			// Check for a press down of the fire button
-			if (Input.GetButtonDown ("Fire1")) {
-				if (OnDown != null)
-					OnDown ();
-			}
-
-			if (Input.GetButtonUp ("Fire1")) {
-				if (OnUp != null)
-					OnUp ();
-			} 
-
-			if (Input.GetKeyDown(KeyCode.Escape)) {
-				if (Back != null) 
-					Back ();
-			}
-		}
-
-		private void OnDestroy() {
-			OnDown = null;
-			OnUp = null;
-		}
+	private void OnDestroy() {
+		OnInputDown = null;
 	}
 }

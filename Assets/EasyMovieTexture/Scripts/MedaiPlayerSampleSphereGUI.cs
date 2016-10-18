@@ -19,7 +19,9 @@ public class MedaiPlayerSampleSphereGUI : MonoBehaviour {
 		}
 	
 	}
-	
+
+	#if !UNITY_WEBGL
+
 	void OnGUI() {
 		
 	
@@ -50,4 +52,5 @@ public class MedaiPlayerSampleSphereGUI : MonoBehaviour {
 		
 
 	}
+	#endif
 }

@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 
 
-
+#if !UNITY_WEBGL
 
 public class SeekBarCtrl : MonoBehaviour ,IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler, IDragHandler{
 
@@ -26,7 +26,8 @@ public class SeekBarCtrl : MonoBehaviour ,IPointerDownHandler, IPointerUpHandler
 	void Start () {
 	
 	}
-	
+
+
 	// Update is called once per frame
 	void Update () {
 
@@ -110,4 +111,6 @@ public class SeekBarCtrl : MonoBehaviour ,IPointerDownHandler, IPointerUpHandler
 		m_bActiveDrag = false;
 	
 	}
+
 }
+#endif
