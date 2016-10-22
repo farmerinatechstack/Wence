@@ -30,9 +30,10 @@ public class VRInput : MonoBehaviour {
 	private void CheckInput() {
 		// Check for a press down of the fire button
 		if (Input.GetButtonDown ("Fire1")) {
-			if (OnInputDown != null)
+			if (OnInputDown != null) {
 				src.Play ();
 				OnInputDown ();
+			}
 		}
 	}
 

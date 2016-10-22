@@ -36,7 +36,7 @@ public class SwapScene : MonoBehaviour {
 			Debug.LogWarning ("No transition fader detected");
 		}
 		
-		if (!transitionByEvent)
+		if (!Mathf.Approximately(0f, transitionTime))
 			StartCoroutine (WaitToTransition ());
 	}
 
@@ -74,6 +74,7 @@ public class SwapScene : MonoBehaviour {
 					transitionFader.FadeOut ();
 					yield return new WaitForSeconds (transitionFader.fadeTime);
 				}
+				VRInput.enableInput = true;
 				asyncLoad.allowSceneActivation = true;
 			} else {
 				Debug.LogWarning ("Still loading to swap scene...");

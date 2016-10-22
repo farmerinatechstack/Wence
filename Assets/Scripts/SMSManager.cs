@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -69,6 +70,7 @@ public class SMSManager : MonoBehaviour {
 			ParseData (stock_pledges [i], false);
 		}
 		ActivateSMSLoads ();
+		StartCoroutine (LoadPeriodically ());
 	}
 
 	void Update() {
@@ -85,18 +87,18 @@ public class SMSManager : MonoBehaviour {
 	}
 
 	private void ActivateSMSLoads() {
+		gotCount = false;
+		gotPower = false;
+		loadedPledges = false;
 		Debug.Log ("Activating SMS Coroutines");
 
 		StartCoroutine (SetPower ());
-
 		countC = LoadCount ();
 		loadC = LoadPledges ();
 		powerC = LoadPower ();
 		StartCoroutine (countC);
 		StartCoroutine (loadC);
 		StartCoroutine (powerC);
-
-		StartCoroutine (LoadPeriodically ());
 	}
 
 
@@ -108,13 +110,13 @@ public class SMSManager : MonoBehaviour {
 
 
 		if (gotCount && gotPower && loadedPledges) {
-			Power = Power > 500 ? Power : (300 + Power);
+			Power = Power > 500 ? Power : (500 + Power);
 			Power = Mathf.Clamp (Power, 0, MAX_POWER);
 			PowerRatio = (float)Power / (float)MAX_POWER;
 		} else {
 			Count = UnityEngine.Random.Range(15, 25);
-			Power = UnityEngine.Random.Range(400, 600);
-			PowerRatio = UnityEngine.Random.Range (0.4f, 0.6f);
+			Power = UnityEngine.Random.Range(500, 800);
+			PowerRatio = UnityEngine.Random.Range (0.5f, 0.8f);
 		}
 
 		Debug.Log("Count: " + Count.ToString());

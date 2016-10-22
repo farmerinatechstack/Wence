@@ -16,13 +16,14 @@ public class DelayedTextAndSkip : MonoBehaviour {
 	}
 
 	void Update() {
-		if (VRDevice.isPresent && Input.GetButtonDown ("Fire1") && textToEnable.enabled) {
+		if (!OVRManager.instance.isUserPresent) {
+			textToEnable.enabled = true;
+		}
+
+		if (OVRManager.instance.isUserPresent && Input.GetButtonDown("Fire1") && textToEnable.enabled) {
+			chimeSource.Play ();
 			swapper.ExecuteSwap ();
 		}
-	}
-
-	void OnApplicationPause(bool pauseStatus) {
-		textToEnable.enabled = true;
 	}
 
 	void TimeElapsed() {

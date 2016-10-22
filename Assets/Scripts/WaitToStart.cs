@@ -4,9 +4,7 @@ using System.Collections;
 public class WaitToStart : MonoBehaviour {
 	public float waitTime;
 
-	[SerializeField] GameObject bubblesLeft;
-	[SerializeField] GameObject bubblesRight;
-	[SerializeField] AudioSource scubaSound;
+	[SerializeField] GameObject[] objs;
 
 	// Use this for initialization
 	void Start () {
@@ -15,8 +13,9 @@ public class WaitToStart : MonoBehaviour {
 
 	IEnumerator WaitToEnable() {
 		yield return new WaitForSeconds (waitTime);
-		bubblesLeft.SetActive (true);
-		bubblesRight.SetActive (true);
-		scubaSound.enabled = true;
+
+		foreach (GameObject o in objs) {
+			o.SetActive (true);
+		}
 	}
 }
