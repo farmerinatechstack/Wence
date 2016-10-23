@@ -7,27 +7,29 @@ using System.Collections.Generic;
  * Singleton used for managing events
  */
 public class EventManager : MonoBehaviour {
-	public static bool experienceReady = false;
+	public static EventManager instance;
+	public bool experienceReady = false;
 
 	// Events: the following are string names for all possible events in the experience
 	public static string ENVIRONMENT_SET = "environmentSet";
-	public static string WAITING_FOR_PLEDGES = "waitingForPledges";
+	public static string WAITING_FOR_PLEDGES = "waitingForPledges";	// Listeners:
 	public static string WAITING_FOR_SHIFT = "waitingForShift";
+	public static string INPUT_DOWN = "inputDown";					// Listeners: SwapScene				
+	public static string CHANGING_SCENE = "changingScene";			// Listeners: 
 
-	private static EventManager instance;
-	private static Dictionary<string, UnityEvent> eventDictionary;
+	private Dictionary<string, UnityEvent> eventDictionary;
 
 	void Awake() {
-		if (!instance) {
+		if (instance == null) {
 			instance = this;
 			eventDictionary = new Dictionary<string, UnityEvent> ();
 		} else {
-			Debug.LogError ("Destroying gameObject with duplicate ExperienceManager instance: " + gameObject.name);
+			Debug.Log("Destroying GameObject with duplicate EventManager: " + gameObject.name);
 			Destroy (gameObject);
 		}
 	}
 
-	public static void StartListening(string eventName, UnityAction listener) {
+	public void StartListening(string eventName, UnityAction listener) {
 		UnityEvent thisEvent = null;
 		if (eventDictionary.TryGetValue(eventName, out thisEvent)) {
 			thisEvent.AddListener(listener);
@@ -38,14 +40,14 @@ public class EventManager : MonoBehaviour {
 		}
 	}
 
-	public static void StopListening(string eventName, UnityAction listener) {
+	public void StopListening(string eventName, UnityAction listener) {
 		UnityEvent thisEvent = null;
 		if (eventDictionary.TryGetValue(eventName, out thisEvent)) {
 			thisEvent.RemoveListener(listener);
 		}
 	}
 
-	public static void TriggerEvent(string eventName) {
+	public void TriggerEvent(string eventName) {
 		UnityEvent thisEvent = null;
 		if (eventDictionary.TryGetValue (eventName, out thisEvent)) {
 			Debug.Log ("Triggering Event: " + eventName);

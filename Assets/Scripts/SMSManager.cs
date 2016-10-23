@@ -5,31 +5,32 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class SMSManager : MonoBehaviour {
-	public static int Count;
-	public static int Power;
-	public const int MAX_POWER = 1000;
-	public static float PowerRatio;
+	public static SMSManager instance;
 
-	private static bool gotCount = false;
-	private static bool gotPower = false;
-	private static bool loadedPledges = false;
+	public int Count;
+	public int Power;
+	public int MAX_POWER = 1000;
+	public float PowerRatio;
 
-	private static SMSManager instance;
-	private static HashSet<int> usedRealPledgeIDs = new HashSet<int> ();
-	private static List<SMSData> pledges = new List<SMSData>();
-	private static List<SMSData> recentPledges = new List<SMSData>();
+	private bool gotCount = false;
+	private bool gotPower = false;
+	private bool loadedPledges = false;
+
+	private HashSet<int> usedRealPledgeIDs;
+	private List<SMSData> pledges;
+	private List<SMSData> recentPledges;
 
 	// SMS Constants
-	private const string ParseKey = "Pledge2254:";
-	private const float PingWaitTime = 10f;
-	private const string COUNT_URL = 	"http://wence.herokuapp.com/get_pledge_count";
-	private const string POWER_URL = 	"http://wence.herokuapp.com/get_power_exponential";
-	private const string LOAD_URL = 	"http://wence.herokuapp.com/last_100";
+	private static string ParseKey = "Pledge2254:";
+	private static float PingWaitTime = 10f;
+	private static string COUNT_URL = 	"http://wence.herokuapp.com/get_pledge_count";
+	private static string POWER_URL = 	"http://wence.herokuapp.com/get_power_exponential";
+	private static string LOAD_URL = 	"http://wence.herokuapp.com/last_100";
 	private static IEnumerator countC;
 	private static IEnumerator powerC;
 	private static IEnumerator loadC;
-	private const string PERIODIC_URL = "http://wence.herokuapp.com/last_minute";
-	string[] stock_pledges = new string[] {
+	private static string PERIODIC_URL = "http://wence.herokuapp.com/last_minute";
+	private static string[] stock_pledges = new string[] {
 		"Pledge2254:0:I pledge to take 5 minute showers.:08/30/2016", 
 		"Pledge2254:0:I will only buy seafood from sustainable fisheries.:08/30/2016", 
 		"Pledge2254:0:Next time I go to the beach, I am going to meditate and take in the beauty.:08/30/2016", 
@@ -57,10 +58,13 @@ public class SMSManager : MonoBehaviour {
 	}
 
 	void Awake() {
-		if (!instance) {
+		if (instance == null) {
 			instance = this;
+			usedRealPledgeIDs = new HashSet<int> ();
+			pledges = new List<SMSData> ();
+			recentPledges = new List<SMSData> ();
 		} else {
-			Debug.LogError ("Destroying gameObject with duplicate SMSManager instance: " + gameObject.name);
+			Debug.Log("Destroying GameObject with duplicate SMSManager: " + gameObject.name);
 			Destroy (gameObject);
 		}
 	}
@@ -71,19 +75,6 @@ public class SMSManager : MonoBehaviour {
 		}
 		ActivateSMSLoads ();
 		StartCoroutine (LoadPeriodically ());
-	}
-
-	void Update() {
-		if (Input.GetKeyDown (KeyCode.P)) {
-			print ("Loaded pledges:");
-			for (int i = 0; i < pledges.Count; i++) {
-				Debug.Log (pledges [i].pledge + " - " + pledges [i].time);
-			}
-			print ("Recent pledges:");
-			for (int j = 0; j < recentPledges.Count; j++) {
-				Debug.Log (recentPledges [j].pledge + " - " + pledges [j].time);
-			}
-		}
 	}
 
 	private void ActivateSMSLoads() {
@@ -176,7 +167,7 @@ public class SMSManager : MonoBehaviour {
 		}
 	}
 
-	public static SMSData GetRandomPledgeText () {
+	public SMSData GetRandomPledgeText () {
 		if (recentPledges.Count == 0 && pledges.Count == 0) {
 			return null;
 		}

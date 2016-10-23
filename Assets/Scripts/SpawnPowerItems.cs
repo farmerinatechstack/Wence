@@ -18,7 +18,7 @@ public class SpawnPowerItems : MonoBehaviour {
 
 	private void Awake() {
 		powerItems = new List<GameObject> (lowPowerItems);
-		if (SMSManager.Power >= powerThreshold) powerItems.AddRange (highPowerItems);
+		if (SMSManager.instance.Power >= powerThreshold) powerItems.AddRange (highPowerItems);
 
 		playerPosition = GameObject.FindGameObjectWithTag ("MainCamera").transform.position;
 		playerPosition.y = 0.5f;
@@ -45,7 +45,7 @@ public class SpawnPowerItems : MonoBehaviour {
 	}
 
 	private GameObject GetPowerItem() {
-		if (Random.Range(0, SMSManager.MAX_POWER) <= SMSManager.Power) {
+		if (Random.Range(0, SMSManager.instance.MAX_POWER) <= SMSManager.instance.Power) {
 			return powerItems[Random.Range(0,powerItems.Count)];
 		} else {
 			return trashPowerItems[Random.Range(0,trashPowerItems.Count)];

@@ -11,13 +11,13 @@ public class DisplayPledge : MonoBehaviour {
 	private float fadeTime = 2f;
 
 	void Start() {
-		pledgeCount.text = SMSManager.Count.ToString ();
+		pledgeCount.text = SMSManager.instance.Count.ToString ();
 		StartCoroutine (Cycle());	
 	}
 
 	private IEnumerator Cycle() {
 		while (true) {
-			SMSManager.SMSData d = SMSManager.GetRandomPledgeText ();
+			SMSManager.SMSData d = SMSManager.instance.GetRandomPledgeText ();
 			if (d == null) {
 				pledgeText.text = "We're out of pledges! Send and keep a pledge later so Monterey Bay stays beautiful.";
 				pledgeTime.text = "Just Now";
