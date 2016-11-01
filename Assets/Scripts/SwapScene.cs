@@ -8,34 +8,31 @@ using System.Collections;
  */
 public class SwapScene : MonoBehaviour {
 	[SerializeField] AudioSource src;
-	[SerializeField] bool transitionByEvent;
+
+	// Three transition types exist: timed, user input, or sequence. A sequence
+	// transition enables a timed or user input transition after a sequence.
+	[SerializeField] bool transitionAfterTime;
+	[SerializeField] bool transitionAfterEvent;
+	[SerializeField] bool sequenceDone;
+
 	[SerializeField] FadeMaterial transitionFader;
 	[SerializeField] float transitionTime;
 	[SerializeField] string sceneName;
 
 	AsyncOperation asyncLoad;
 
-	private void OnDisable() {
-		EventManager.instance.StopListening (EventManager.INPUT_DOWN, HandleSwap);
-	}
-
 	private void Start() {
-		EventManager.instance.StartListening (EventManager.INPUT_DOWN, HandleSwap);
-
 		if (!string.IsNullOrEmpty(sceneName)) {
 			asyncLoad = SceneManager.LoadSceneAsync(sceneName);
 			asyncLoad.allowSceneActivation = false;
 		} else {
 			Debug.LogError ("No transition scene detected");
 		}
+		if (transitionFader) transitionFader.FadeIn ();
 
-		if (transitionFader) {
-			transitionFader.FadeIn ();
-		} else {
-			Debug.LogError ("No transition fader detected");
-		}
-		
-		if (!transitionByEvent)
+		EventManager.instance.StartListening (EventManager.SEQUENCE_DONE, ToggleSequence);
+		EventManager.instance.StartListening (EventManager.INPUT_DOWN, HandleSwap);
+		if (transitionAfterTime && sequenceDone)
 			StartCoroutine (WaitToTransition ());
 	}
 
@@ -47,21 +44,26 @@ public class SwapScene : MonoBehaviour {
 		#endif
 	}
 
-	private void HandleSwap() {
-		if (transitionByEvent) {
-			VRInput.instance.enableInput = false;
-			src.Play ();
-			StartCoroutine (Swap ());
-		}
-	}
-
 	IEnumerator WaitToTransition() {
 		yield return new WaitForSeconds (transitionTime);
 		StartCoroutine (Swap ());
 	}
 
-	IEnumerator Swap() {
+	private void ToggleSequence() {
+		sequenceDone = true;
+		if (transitionAfterTime)
+			StartCoroutine (WaitToTransition ()); 
+	}
 
+	private void HandleSwap() {
+		if (transitionAfterEvent && sequenceDone) {
+			src.Play ();
+			StartCoroutine (Swap ());
+		}
+	}
+
+	IEnumerator Swap() {
+		VRInput.instance.enableInput = false;
 		while (!asyncLoad.isDone) {
 			float progress = asyncLoad.progress / 0.9f;
 			yield return null;
@@ -72,6 +74,7 @@ public class SwapScene : MonoBehaviour {
 					transitionFader.FadeOut ();
 					yield return new WaitForSeconds (transitionFader.fadeTime);
 				}
+
 				VRInput.instance.enableInput = true;
 				asyncLoad.allowSceneActivation = true;
 			} else {

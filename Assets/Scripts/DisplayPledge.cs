@@ -6,13 +6,19 @@ public class DisplayPledge : MonoBehaviour {
 	[SerializeField] Text pledgeText;
 	[SerializeField] Text pledgeTime;
 	[SerializeField] Text pledgeCount;
+	[SerializeField] int countIncrement;
 
 	private float pledgeDelay = 7f;
 	private float fadeTime = 2f;
 
 	void Start() {
-		pledgeCount.text = SMSManager.instance.Count.ToString ();
-		StartCoroutine (Cycle());	
+		int totalCount = SMSManager.instance.Count + countIncrement;
+		pledgeCount.text = totalCount.ToString ();
+
+		SMSManager.SMSData d = SMSManager.instance.GetRandomPledgeText ();
+		print (d.pledge);
+		pledgeText.text = d.pledge;
+		pledgeTime.text = d.time;
 	}
 
 	private IEnumerator Cycle() {

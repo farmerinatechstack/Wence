@@ -3,7 +3,14 @@ guid: 13153d4d4d8ba594abfc022a98753e95
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
+    100000: coral_v2_exp011
+    100002: //RootNode
+    400000: coral_v2_exp011
+    400002: //RootNode
+    2300000: coral_v2_exp011
+    3300000: coral_v2_exp011
     4300000: coral_v2_exp011
+    11100000: //RootNode
   materials:
     importMaterials: 1
     materialName: 2
@@ -11,7 +18,7 @@ ModelImporter:
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
-    resampleRotations: 1
+    resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
     animationImportErrors: 

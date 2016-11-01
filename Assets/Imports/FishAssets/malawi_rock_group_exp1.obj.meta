@@ -3,7 +3,14 @@ guid: ef6bb581aee3a404c8266a7b84eb20af
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
+    100000: //RootNode
+    100002: Object039
+    400000: //RootNode
+    400002: Object039
+    2300000: Object039
+    3300000: Object039
     4300000: Object039
+    11100000: //RootNode
   materials:
     importMaterials: 1
     materialName: 2
@@ -11,7 +18,7 @@ ModelImporter:
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
-    resampleRotations: 1
+    resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
     animationImportErrors: 

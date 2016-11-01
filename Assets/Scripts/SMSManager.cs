@@ -29,14 +29,13 @@ public class SMSManager : MonoBehaviour {
 	private static IEnumerator countC;
 	private static IEnumerator powerC;
 	private static IEnumerator loadC;
-	private static string PERIODIC_URL = "http://wence.herokuapp.com/last_minute";
 	private static string[] stock_pledges = new string[] {
-		"Pledge2254:0:I pledge to take 5 minute showers.:08/30/2016", 
-		"Pledge2254:0:I will only buy seafood from sustainable fisheries.:08/30/2016", 
-		"Pledge2254:0:Next time I go to the beach, I am going to meditate and take in the beauty.:08/30/2016", 
-		"Pledge2254:0:I will go surfing more and become closer to the sea.:08/30/2016",
-		"Pledge2254:0:I am going to fish for my own food.:08/30/2016",
-		"Pledge2254:0:Next time I drink water, I won't waste any.:08/30/2016"
+		"Pledge2254:0:I promise to take 5 minute showers so I can help out the oceans.:10/15/2016", 
+		"Pledge2254:0:I love the sound of the waves on the rocks near my home.:10/22/2016", 
+		"Pledge2254:0:Next time I go to the beach, I am going to meditate and take in the beauty.:10/5/2016", 
+		"Pledge2254:0:I will go surfing more and become closer to the sea.:11/1/2016",
+		"Pledge2254:0:I got married on a beach. Oceans are the most beautiful part of the world.:10/17/2016",
+		"Pledge2254:0:There's something special about water. It's important for all life and we need to protect our waters.:08/30/2016"
 	};
 
 	public class SMSData {
@@ -73,16 +72,16 @@ public class SMSManager : MonoBehaviour {
 		for (int i = 0; i < stock_pledges.Length; i++) {
 			ParseData (stock_pledges [i], false);
 		}
+
 		ActivateSMSLoads ();
-		StartCoroutine (LoadPeriodically ());
 	}
 
 	private void ActivateSMSLoads() {
 		gotCount = false;
 		gotPower = false;
 		loadedPledges = false;
-		Debug.Log ("Activating SMS Coroutines");
 
+		Debug.Log ("Activating SMS Coroutines");
 		StartCoroutine (SetPower ());
 		countC = LoadCount ();
 		loadC = LoadPledges ();
@@ -94,24 +93,25 @@ public class SMSManager : MonoBehaviour {
 
 
 	IEnumerator SetPower() {
-		yield return new WaitForSeconds (30f); // Wait for WWW connection to be established and read
+		#if !UNITY_EDITOR
+		yield return new WaitForSeconds (30f); // Wait 30s for WWW connection results
+		#endif
+
+		yield return null;
 		StopCoroutine(countC);
 		StopCoroutine(loadC);
 		StopCoroutine(powerC);
 
-
+		Debug.Log ("Populating SMS Data");
 		if (gotCount && gotPower && loadedPledges) {
-			Power = Power > 500 ? Power : (500 + Power);
+			Power = Power > 600 ? Power : (600 + Power);
 			Power = Mathf.Clamp (Power, 0, MAX_POWER);
 			PowerRatio = (float)Power / (float)MAX_POWER;
 		} else {
-			Count = UnityEngine.Random.Range(15, 25);
-			Power = UnityEngine.Random.Range(500, 800);
-			PowerRatio = UnityEngine.Random.Range (0.5f, 0.8f);
+			Count = UnityEngine.Random.Range(20, 40);
+			Power = UnityEngine.Random.Range(600, 800);
+			PowerRatio = UnityEngine.Random.Range (0.6f, 0.8f);
 		}
-
-		Debug.Log("Count: " + Count.ToString());
-		Debug.Log("Power: " + Power.ToString());
 	}
 
 	IEnumerator LoadCount() {				// Loads total count of pledges.
@@ -135,15 +135,6 @@ public class SMSManager : MonoBehaviour {
 		yield return www;
 		ParseData (www.text, false);
 		loadedPledges = true;
-	}
-
-	IEnumerator LoadPeriodically() { 		// Loads new pledges periodically.
-		while (true) {
-			WWW www = new WWW (PERIODIC_URL);
-			yield return www;
-			ParseData (www.text, true);
-			yield return new WaitForSeconds (PingWaitTime);
-		}
 	}
 
 	/* Function: ParseData

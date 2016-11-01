@@ -3,11 +3,34 @@ guid: c901b2525ff9cb34ba9884196b6db131
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
+    100000: malawi_rock_exp1
+    100002: //RootNode
+    100004: Object001
+    100006: Object002
+    100008: Object003
+    100010: Object004
+    400000: malawi_rock_exp1
+    400002: //RootNode
+    400004: Object001
+    400006: Object002
+    400008: Object003
+    400010: Object004
+    2300000: malawi_rock_exp1
+    2300002: Object001
+    2300004: Object002
+    2300006: Object003
+    2300008: Object004
+    3300000: malawi_rock_exp1
+    3300002: Object001
+    3300004: Object002
+    3300006: Object003
+    3300008: Object004
     4300000: malawi_rock_exp1
     4300002: Object001
     4300004: Object002
     4300006: Object003
     4300008: Object004
+    11100000: //RootNode
   materials:
     importMaterials: 1
     materialName: 2
@@ -15,7 +38,7 @@ ModelImporter:
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
-    resampleRotations: 1
+    resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
     animationImportErrors: 

@@ -8,14 +8,13 @@ using System.Collections.Generic;
  */
 public class EventManager : MonoBehaviour {
 	public static EventManager instance;
-	public bool experienceReady = false;
 
 	// Events: the following are string names for all possible events in the experience
+	public static string CHANGING_SCENE = "changingScene";			
 	public static string ENVIRONMENT_SET = "environmentSet";
-	public static string WAITING_FOR_PLEDGES = "waitingForPledges";	// Listeners:
-	public static string WAITING_FOR_SHIFT = "waitingForShift";
 	public static string INPUT_DOWN = "inputDown";					// Listeners: SwapScene				
-	public static string CHANGING_SCENE = "changingScene";			// Listeners: 
+	public static string SEQUENCE_DONE = "sequenceDone";
+
 
 	private Dictionary<string, UnityEvent> eventDictionary;
 

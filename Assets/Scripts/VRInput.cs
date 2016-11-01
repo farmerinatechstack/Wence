@@ -2,7 +2,7 @@
 using UnityEngine.SceneManagement;
 using System;
 
-// Singleton handling VR inputs
+// Singleton handling Gear VR inputs
 public class VRInput : MonoBehaviour {
 	public static VRInput instance;
 	public bool enableInput = true;
@@ -19,7 +19,7 @@ public class VRInput : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (enableInput && OVRManager.instance.isUserPresent)
+		if (enableInput && (OVRManager.instance.isUserPresent || Debug.isDebugBuild) )
 			CheckInput();
 
 		#if UNITY_EDITOR

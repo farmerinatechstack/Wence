@@ -3,7 +3,24 @@ guid: 6123a37848a6c374bb12adfede661076
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
+    100000: Bone006
+    100002: Bone007
+    100004: Bone008
+    100006: Bone009
+    100008: Bone010
+    100010: Cylinder012
+    100012: //RootNode
+    400000: Bone006
+    400002: Bone007
+    400004: Bone008
+    400006: Bone009
+    400008: Bone010
+    400010: Cylinder012
+    400012: //RootNode
     4300000: Cylinder012
+    7400000: idle
+    11100000: //RootNode
+    13700000: Cylinder012
   materials:
     importMaterials: 1
     materialName: 2
@@ -11,7 +28,7 @@ ModelImporter:
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
-    resampleRotations: 1
+    resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
     animationImportErrors: 

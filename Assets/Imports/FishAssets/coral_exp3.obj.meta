@@ -3,7 +3,14 @@ guid: 66abc1b2d98cb374e988dd53b7aabb23
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
+    100000: //RootNode
+    100002: Group18603
+    400000: //RootNode
+    400002: Group18603
+    2300000: Group18603
+    3300000: Group18603
     4300000: Group18603
+    11100000: //RootNode
   materials:
     importMaterials: 1
     materialName: 2
@@ -11,7 +18,7 @@ ModelImporter:
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
-    resampleRotations: 1
+    resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
     animationImportErrors: 
