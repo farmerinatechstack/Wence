@@ -10,12 +10,12 @@ public class AudioFade : MonoBehaviour {
 	void Start () {
 		EventManager.instance.StartListening (EventManager.CHANGING_SCENE, FadeAudio);
 		src.volume = 0f;
-		StartCoroutine(ExecuteFade(20, 0.35f));
+		StartCoroutine(ExecuteFade(40, 0.35f));
 	}
 
 	void FadeAudio() {
 		if (SceneManager.GetActiveScene().name == "WhenceEnd") {
-			StartCoroutine(ExecuteFade(20, 0f));
+			StartCoroutine(ExecuteFade(25, 0f));
 			Destroy (gameObject, 20 * timeStep); 
 		}
 	}

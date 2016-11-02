@@ -11,7 +11,7 @@ public class PledgeInteraction : MonoBehaviour {
 	[SerializeField] GameObject root;
 	[SerializeField] GameObject pledgeThird;
 	[SerializeField] GameObject nextPledge;
-	[SerializeField] PlayBubbleEffect bubbles;
+	[SerializeField] FadeMaterial fader;
 
 	[SerializeField] VRInteractible interactiveItem;
 
@@ -70,19 +70,18 @@ public class PledgeInteraction : MonoBehaviour {
 	}
 
 	IEnumerator DisplayCycle() {
-		bubbles.PlayBubbles ();
+		fader.FadeOut ();
 		src.loop = false;
 		src.PlayOneShot (tapClip);
-		yield return new WaitForSeconds (0.1f);
+		yield return new WaitForSeconds (fader.fadeTime + 0.2f);
 
 		pledgeThird.SetActive (true);
-
 		if (nextPledge == null) { // This is the last pledge
 			EventManager.instance.TriggerEvent (EventManager.ENVIRONMENT_SET);
 		} else {
 			nextPledge.SetActive (true);
 		}
-
-		Destroy (root, 1.0f);
+		fader.FadeIn ();
+		Destroy (root);
 	}
 }

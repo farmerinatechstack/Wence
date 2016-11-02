@@ -8,7 +8,10 @@ using System.Collections;
 public class PledgeHandler : MonoBehaviour {
 	public float waitTime = 5f;
 
-	[SerializeField] PlayBubbleEffect bubbles;
+	[SerializeField] GameObject bakedFloor;
+	[SerializeField] GameObject unbakedFloor;
+
+	[SerializeField] FadeMaterial fader;
 	[SerializeField] GameObject[] toEnable;
 	[SerializeField] GameObject firstPledge;
 
@@ -26,14 +29,20 @@ public class PledgeHandler : MonoBehaviour {
 
 	IEnumerator WaitToDisplayPledge() {
 		yield return new WaitForSeconds (waitTime);
-		bubbles.PlayBubbles ();
-		VRInput.instance.enableInput = true;
 
-		yield return new WaitForSeconds (0.5f);
+		fader.fadeTime = 1.0f;
+		fader.FadeOut ();
+		yield return new WaitForSeconds (fader.fadeTime);
+		VRInput.instance.enableInput = true;
 		firstPledge.SetActive (true);
+		fader.FadeIn ();
 	}
 
 	private void CompleteEnvironment() {
+		// Swap the floors used
+		unbakedFloor.SetActive(false);
+		bakedFloor.SetActive (true);
+
 		foreach (GameObject obj in toEnable) {
 			obj.SetActive (true);
 		}
